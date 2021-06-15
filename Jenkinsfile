@@ -6,6 +6,11 @@ pipeline {
         ansiColor('xterm')
         disableConcurrentBuilds()
     }
+    
+    environment {
+        MAVEN_OPTS = '-Djansi.force=true'
+    }
+
 
     stages {
         // Stage conf to setup environment variable for build
