@@ -1,14 +1,10 @@
 pipeline {
 
-    agent { label "master" }
+    agent { label "main" }
 
     options {
         ansiColor('xterm')
         disableConcurrentBuilds()
-    }
-    
-    environment {
-        MAVEN_OPTS = '-Djansi.force=true'
     }
 
 
