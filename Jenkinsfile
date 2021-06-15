@@ -1,6 +1,6 @@
 pipeline {
 
-    agent { label "main" }
+    agent { label "master" }
 
     options {
         ansiColor('xterm')
