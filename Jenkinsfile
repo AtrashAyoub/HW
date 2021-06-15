@@ -49,7 +49,7 @@ pipeline {
         // saving the image for deployment (we don't have docker registry)
         stage("prepare image to deploy") {
             // This step will only run when merging to release branch
-            // TODO 2 create branch release* in VCS and do Pull Request
+            // TODO 2 create branch release* in VCS and do Pull Request - DONE
             when {
                 branch "release*"
             }
@@ -64,7 +64,7 @@ pipeline {
         // deploy the app (image)
         stage("deploy") {
             // This step will only run when merging to release branch
-            // TODO 2 create branch release* in VCS and do Pull Request 
+            // TODO 2 create branch release* in VCS and do Pull Request - DONE
             when {
                 branch "release*"
             }
