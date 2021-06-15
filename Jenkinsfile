@@ -54,16 +54,16 @@ pipeline {
             }
             // Adding agent to make sure we'll use  the same (@2) workspace
             agent { label "master" }
-            // TODO 3 add a command to save docker image as tar file in the deployment folder
+            // TODO 3 add a command to save docker image as tar file in the deployment folder - DONE
             steps {
-                sh "[write the cmd here]"
+                sh "docker save ${env['IMAGE']} > ./deployment/${env['IMAGE']}.tar"
             }
         }
 
         // deploy the app (image)
         stage("deploy") {
             // This step will only run when merging to release branch
-            // TODO 2 create branch release* in VCS and do Pull Request
+            // TODO 2 create branch release* in VCS and do Pull Request 
             when {
                 branch "release*"
             }
@@ -78,14 +78,14 @@ pipeline {
                 sh 'ls -la deployment'
                 ansiblePlaybook(
                         colorized: true,
-                        // TODO 4 On Jenkins (http://jenkins_url:8080/credentials/) create a credentials secret (SSH username with private key) with the provided key
-                        credentialsId: '[credentials-id]',
+                        // TODO 4 On Jenkins (http://jenkins_url:8080/credentials/) create a credentials secret (SSH username with private key) with the provided key - DONE
+                        credentialsId: 'Ansible_Credentials',
                         disableHostKeyChecking: true,
-                        // TODO 4 add new image param with image name as value i.e. image=[?]
+                        // TODO 4 add new image param with image name as value i.e. image=[?]  - DONE
                         extras: "-e server_ip=${env.SERVER_IP} " +
                                 "-e project_name=${env.PROJ} " +
-                                "-vvv",
-                        // TODO 4 add ip to inventory file
+                                "-e image=${env['IMAGE']}",
+                        // TODO 4 add ip to inventory file - DONE
                         inventory: 'deployment/inventory',
                         playbook: 'deployment/deploy.yml'
                 )
