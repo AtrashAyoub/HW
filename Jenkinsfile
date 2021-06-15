@@ -9,7 +9,7 @@ pipeline {
 
 
     stages {
-        // Stage conf to setup environment variable for build
+        // Stage conf to setup environment variable for build 
         stage("conf") {
             steps {
                 script {
