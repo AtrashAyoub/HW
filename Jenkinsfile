@@ -71,7 +71,7 @@ pipeline {
             agent {
                 dockerfile {
                     dir 'deployment'
-                    args '-v /home/ec2-user/.ansible:/home/centos/.ansible'
+                    args '-v /home/ec2-user/.ansible:/home/centos/.ansible -e DEFAULT_LOCAL_TMP=/tmp/'
                 }
             }
             steps {
